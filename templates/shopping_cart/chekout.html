@@ -1,0 +1,137 @@
+{% extends "main_template.html" %}
+{% load render_partial %}
+{% load humanize %}
+
+{% block title %}پرداخت{% endblock %}
+
+
+{% block content %}
+<div class="site__body">
+	<div class="page-header">
+		<div class="page-header__container container">
+			<div class="page-header__breadcrumb">
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="{% url "main:index" %}">خانه</a>
+							/
+						</li>
+						
+						<li class="breadcrumb-item active" aria-current="page">پرداخت</li>
+					</ol>
+				</nav>
+			</div>
+			<div class="page-header__title">
+				<h1>فاکتور سفارش</h1></div>
+		</div>
+	</div>
+	<div class="checkout block">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 col-lg-6 col-xl-7">
+					<div class="card mb-lg-0">
+						<div class="card-body">
+							<h3 class="card-title">مشخصات مشتری</h3>
+							<form action="{% url "Shopping_Cart:checkout"  order_id=order.order_code %}" method="post">
+							{% csrf_token %}
+								<div class="form-row">
+									<div class="form-group col-md-6">
+										<label for="checkout-first-name">نام</label>
+										{{form.first_name}}
+									</div>
+									<div class="form-group col-md-6">
+										<label for="checkout-last-name">نام خانوادگی</label>
+										{{form.last_name}}
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="form-group col-md-6">
+										<label for="checkout-email">ایمیل</label>
+										{{form.email}}
+									</div>
+									<div class="form-group col-md-6">
+										<label for="checkout-phone">شماره موبایل</label>
+										{{form.phone_num}}
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="checkout-street-address">آدرس</label>
+									{{form.address}}
+								</div>
+								<div>
+									<div class="form-group">
+										<label for="checkout-comment">توضیحات سفارش <span class="text-muted">(اختیاری)</span></label>
+										{{form.description}}
+									</div>
+								</div>
+						    </form>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-lg-6 col-xl-5 mt-4 mt-lg-0">
+					<div class="card mb-0">
+						<div class="card-body">
+							<h3 class="card-title">فاکتور</h3>
+							<table class="checkout__totals">
+								<thead class="checkout__totals-header">
+									<tr>
+										<th>کالا</th>
+										<th>تعداد</th>
+										<th>قیمت کالا ها</th>
+									</tr>
+								</thead>
+								<tbody class="checkout__totals-products">
+									{% for item in shopping_cart %}
+									<tr>
+										<td>{{item.product.title}}</td>
+										<td>{{item.qty}}</td>
+										<td>{{item.total_price|intcomma:False}} تومان</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+								<tbody class="checkout__totals-subtotals">
+									<tr>
+										<th colspan="2">جمع سبد خرید</th>
+										<td>{{total_price|intcomma:False}} تومان</td>
+									</tr>
+									<tr>
+										<th colspan="2">حمل و نقل</th>
+										<td>{{delivery|intcomma:False}} تومان</td>
+									</tr>
+									<tr>
+										<th colspan="2">مالیات</th>
+										<td>{{tax|intcomma:False}} تومان</td>
+									</tr>
+								</tbody>
+								<tfoot class="checkout__totals-footer">
+									<tr>
+										<th colspan="2">مبلغ نهایی</th>
+										<td>{{final_price|intcomma:False}} تومان</td>
+									</tr>
+								</tfoot>
+							</table>
+							<div class="payment-methods">
+								{{form.payment_type}}
+							</div><br>
+							<form action="{% url "Shopping_Cart:confirm_discount"  order_id=order.order_code %}" method="post" style="width: 350px; display: flex; justify-content: center; ">
+								{% comment %} <input type="text" id="input-coupon-code" style="text-align:center;" placeholder="کد تخفیف را وارد کنید"> {% endcomment %}
+								{% csrf_token %}
+								{{ form_discount }}
+								<button type="submit" class="btn btn-primary">اعمال</button>
+							</form>
+							<br><br>
+							<div class="checkout__agree form-group">
+								<div class="form-check"><span class="form-check-input input-check"><span class="input-check__body"><input class="input-check__input" type="checkbox" id="checkout-terms"> <span class="input-check__box"></span>
+									</span>
+									</span>
+									<label class="form-check-label" for="checkout-terms">من <a target="_blank" href="terms-and-conditions.html">قوانین و مقررات</a> را خوانده و موافقم *</label>
+								</div>
+							</div>
+							<button type="submit" class="btn btn-primary btn-xl btn-block">پرداخت</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+<h3 class="reviews-view__header">دیدگاه های مشتریان</h3>
+<div class="reviews-list">
+    <ol class="reviews-list__content">
+        {% for comment in product.Commetnt_Product.all %}
+            {% if comment.is_active %}
+                {% if comment.comment_parent == None %}
+                    <li class="reviews-list__item" style="display:flex; justify-content:space-between;">
+                        <div class="review">
+                            <div class="review__avatar">
+                                <img src="{{media_url}}images/avatars/avatar-1.jpg" alt=""></div>
+                            <div class="review__content">
+                                <div class="review__author">{{comment.user.first_name}} {{comment.user.last_name}}</div>
+                                <div class="review__text">{{comment.comment}}</div>
+                                <div class="review__date">{{comment.logged_date}}</div>
+                            </div>
+                        </div>
+                        <div>
+                            {% if user.is_authenticated %}
+
+                            <div>
+                                <a class="btn btn-info" id="btn_{{comment.id}}" onclick="ShowComments({{product.id}},{{comment.id}},'{{product.slug}}')">پاسخ</a>
+                            </div>
+                            <div id="comment_form_{{comment.id}}"> <div>
+                            {% endif %}
+                        </div>
+                    </li>
+                    {% for item in comment.Comment_Parent.all  %}
+                        {% if comment.is_active %}
+                            <li class="reviews-list__item" style="background-color:beige; width:95%; margin:10px 5%;">
+                                <div class="review">
+                                    <div class="review__avatar">
+                                        <img src="{{media_url}}images/avatars/avatar-4.jpg" alt=""></div>
+                                    <div class="review__content">
+                                        <div class="review__author">{{item.user.first_name}} {{item.user.last_name}}</div>
+                                        <div class="review__text">{{item.comment}}</div>
+                                        <div class="review__date">{{item.logged_date}}</div>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
+                {% else %}
+
+                {% endif %} 
+            {% endif %}
+        {% endfor %}
+    </ol>
+</div>

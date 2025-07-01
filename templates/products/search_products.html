@@ -1,0 +1,24 @@
+{% extends "main_template.html" %}
+{% load render_partial %}
+{% load humanize %}
+
+{% block title %}نتیجه جستجو{% endblock %}
+
+{% block content %}
+    {% if products %}
+        <div class="">
+            <div class="container">
+                <h2 style="text-align:center;">نتیجه جستجو</h2>
+                <div class="product-flexbox">
+                    {% for product in products %}
+                        {% include "products/product_partials/product_box.html" with type=1 %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="container" style="padding:100px;">
+            <h3 style="text-align:center;">کالای مورد نظر یافت نشد</h3>
+        </div>
+    {% endif %}
+{% endblock %}

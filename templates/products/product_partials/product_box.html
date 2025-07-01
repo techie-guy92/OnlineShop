@@ -1,0 +1,190 @@
+{% load humanize %}
+
+{% if type == 1 %}
+
+<div class="product-card" style="width:200px !important; margin-left: 12px">
+    <div class="product-card__image">
+        <a href="{{product.get_absolute_url}}"><img src="{{media_url}}{{product.image}}" alt="{{product.title}}"></a>
+    </div>
+    <div class="product-card__info">
+        <div class="product-card__name">
+            <a href="{{product.get_absolute_url}}">{{product.title}}</a> 
+            {% comment %} <a href="{% url "products:cheapest_products" slug=product.slug %}">{{product.title}}</a>  {% endcomment %}
+        </div>
+    </div>
+    <div class="product-card__actions"> 
+        {% if product.fetch_count_of_product <= 0 %}
+            <span style="color:red">ناموجود</span>
+        {% else %}
+            {% if product.price > product.fetch_discount_basket %}
+                <div class="product-card__prices"><del>{{ product.price|intcomma:False }}</del> تومان</div>
+                <div class="product-card__prices">{{ product.fetch_discount_basket|intcomma:False }} تومان</div>
+            {% else %}
+                <div class="product-card__prices">{{ product.price|intcomma:False }} تومان</div>
+            {% endif %}
+        {% endif %}
+        <div class="product-card__buttons">
+            {% if product.fetch_count_of_product > 0 %}
+                <button class="btn btn-primary product-card__addtocart" type="button" onclick="add_to_cart({{product.id}},1)">افزودن به سبد</button>
+            {% endif %}
+            {% if user.is_authenticated  %}
+                {% if product.fetch_wish_list %}
+                    <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist" type="button"> 
+                        <i class="fa fa-heart"></i>
+                        <span class="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                    </button>
+                {% else %}
+                    <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist" type="button" onclick="add_to_wish_list({{product.id}})"> 
+                        <i class="fa fa-heart" aria-hidden="true" style="color:#181818"></i>
+                    <span class="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                    </button>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% elif type == 2 %}
+
+<div class="product-card" style="width:200px !important; margin-left: 12px">
+    <div class="product-card__image">
+        <a href="{{product.get_absolute_url}}"><img src="{{media_url}}{{product.image}}" alt="{{product.title}}"></a>
+    </div>
+    <div class="product-card__badges-list">
+        <div class="product-card__badge product-card__badge--new">جدید</div>
+    </div>
+    <div class="product-card__info">
+        <div class="product-card__name">
+            <a href="{{product.get_absolute_url}}">{{product.title}}</a>
+        </div>
+    </div>
+    <div class="product-card__actions">
+        {% if product.fetch_count_of_product <= 0 %}
+            <span style="color:red">ناموجود</span>
+        {% else %}
+            {% if product.price > product.fetch_discount_basket %}
+                <div class="product-card__prices"><del>{{ product.price|intcomma:False }}</del> تومان</div>
+                <div class="product-card__prices">{{ product.fetch_discount_basket|intcomma:False }} تومان</div>
+            {% else %}
+                <div class="product-card__prices">{{ product.price|intcomma:False }} تومان</div>
+            {% endif %}
+        {% endif %}
+        <div class="product-card__buttons">
+        {% if product.fetch_count_of_product > 0 %}
+            <button class="btn btn-primary product-card__addtocart" type="button" onclick="add_to_cart({{product.id}},1)">افزودن به سبد</button>
+        {% endif %}
+        
+        {% if user.is_authenticated  %}
+            {% if product.fetch_wish_list %}
+                <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist" type="button"> 
+                    <i class="fa fa-heart"></i>
+                    <span class="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                </button>
+            {% else %}
+                <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist" type="button" onclick="add_to_wish_list({{product.id}})"> 
+                    <i class="fa fa-heart" aria-hidden="true" style="color:#181818"></i>
+                <span class="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                </button>
+            {% endif %}
+        {% endif %} 
+        </div>
+    </div>
+</div>
+
+{% elif type == 3 %}
+
+<div class="product-card" style="width:200px !important; margin-left: 12px">
+    <div class="product-card__image">
+        <a href="{{product.get_absolute_url}}"><img src="{{media_url}}{{product.image}}" alt="{{product.title}}"></a>
+    </div>
+    <div class="product-card__info">
+        <div class="product-card__name">
+            <a href="{{product.get_absolute_url}}">{{product.title}}</a>
+        </div>
+    </div>
+    <div class="product-card__actions">
+        {% if product.fetch_count_of_product <= 0 %}
+            <span style="color:red">ناموجود</span>
+        {% else %}
+            {% if product.price > product.fetch_discount_basket %}
+                <div class="product-card__prices"><del>{{ product.price|intcomma:False }}</del> تومان</div>
+                <div class="product-card__prices">{{ product.fetch_discount_basket|intcomma:False }} تومان</div>
+            {% else %}
+                <div class="product-card__prices">{{ product.price|intcomma:False }} تومان</div>
+            {% endif %}
+        {% endif %}
+        <div class="product-card__buttons">
+            {% if product.fetch_count_of_product > 0 %}            
+                <button class="btn btn-primary product-card__addtocart" type="button" onclick="add_to_cart({{product.id}},1)">افزودن به سبد</button>
+            {% endif %}
+            {% if user.is_authenticated  %}
+                {% if product.fetch_wish_list %}
+                    <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist" type="button"> 
+                        <i class="fa fa-heart"></i>
+                        <span class="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                    </button>
+                {% else %}
+                    <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist" type="button" onclick="add_to_wish_list({{product.id}})"> 
+                        <i class="fa fa-heart" aria-hidden="true" style="color:#181818"></i>
+                    <span class="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                    </button>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% elif type == 4 %}
+
+<div class="products-list__body">
+    {% for product in products %}
+        <div class="products-list__item">
+            <div class="product-card"> 
+                <div class="product-card__image">
+                    <a href="product.html">
+                        <img src="{{media_url}}{{product.image}}" alt="{{product.title}}">
+                    </a>
+                </div>
+                <div class="product-card__info">
+                    <div class="product-card__name"><a href="{% url "products:product_detail" slug=product.slug %}">{{product.title}}</a></div>
+                </div>
+                <div class="product-card__actions">
+                    {% if product.fetch_count_of_product <= 0 %}
+                        {% comment %} <span style="color:red">ناموجود</span> {% endcomment %}
+                        <div class="product-card__availability">موجودی : 0 <span class="text-success">موجود در انبار</span></div>
+                    {% else %}
+                        <div class="product-card__availability">موجودی : {{product.fetch_count_of_product}} <span class="text-success">موجود در انبار</span></div>
+                        {% if product.price > product.fetch_discount_basket %}
+                            <div class="product-card__prices"><del>{{ product.price|intcomma:False }}</del> تومان</div>
+                            <div class="product-card__prices">{{ product.fetch_discount_basket|intcomma:False }} تومان</div>
+                        {% else %}
+                            <div class="product-card__prices">{{ product.price|intcomma:False }} تومان</div>
+                        {% endif %}
+                    {% endif %}
+                    <div class="product-card__buttons">
+                        {% if product.fetch_count_of_product > 0 %}  
+                            <button class="btn btn-primary product-card__addtocart" type="button" onclick="add_to_cart({{product.id}},1)">افزودن به سبد</button>
+                            <button class="btn btn-secondary product-card__addtocart product-card__addtocart--list" type="button" onclick="add_to_cart({{product.id}},1)">افزودن به سبد</button>
+                        {% endif %}
+                        {% if user.is_authenticated  %}
+                            {% if product.fetch_wish_list %}
+                                <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist" type="button"> 
+                                    <i class="fa fa-heart"></i>
+                                    <span class="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                                </button>
+                            {% else %}
+                                <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist" type="button" onclick="add_to_wish_list({{product.id}})"> 
+                                    <i class="fa fa-heart" aria-hidden="true" style="color:#181818"></i>
+                                <span class="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                                </button>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endif %}
+

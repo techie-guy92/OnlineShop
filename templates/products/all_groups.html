@@ -1,0 +1,23 @@
+{% extends "main_template.html" %}
+{% load render_partial %}
+{% load humanize %}
+
+{% block title %}گروه ها{% endblock %}
+
+{% block content %}
+<div class="block-categories__list">
+    {% for group in all_groups %}
+        <div class="block-categories__item category-card category-card--layout--compact">
+            <div class="category-card__body">
+                <div class="category-card__image">
+                    <a href="{% url "products:products" slug=group.slug %}"> <img src="{{media_url}}{{group.image}}" alt="{{group.title}}"> </a>
+                </div>
+                <div class="category-card__content"> </div>
+                    <div class="category-card__name"><a href="{% url "products:products" slug=group.slug %}">{{group.title}}</a></div>
+                    <div class="category-card__products">{{group.productGroup.all|length}} محصول</div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

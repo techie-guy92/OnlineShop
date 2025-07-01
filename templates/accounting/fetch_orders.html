@@ -1,0 +1,40 @@
+{% load humanize %}
+
+<div class="dashboard__orders card">
+    <div class="card-header">
+        <h5>لیست سفارش های اخیر</h5>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-table">
+        <div class="table-responsive-sm">
+            <table>
+                <thead>
+                    <tr>
+                        <th>شماره سفارش</th>
+                        <th>تاریخ</th>
+                        <th>وضعیت</th>
+                        <th>جمع کل</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                        <tr>
+                            <td>{{ order.id }}</td>
+                            <td>{{ order.logged_date }}</td>
+                            {% if order.order_state %}
+                                <td>{{ order.order_state }}</td>
+                            {% else %}
+                                <td>{{ order_state_6 }}</td>
+                            {% endif %}
+                            <td>{{ order.fetch_data_price|intcomma:False }} تومان</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+

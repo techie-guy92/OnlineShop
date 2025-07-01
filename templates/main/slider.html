@@ -1,0 +1,42 @@
+<div class="block-slideshow block-slideshow--layout--full block">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="block-slideshow__body">
+                    <div class="owl-carousel">
+                        {% for slider in sliders %}
+                            <a class="block-slideshow__slide" href="{{ slider.link_slider }}" target="_blank">
+                                {% comment %} <img class="block-slideshow__slide-image block-slideshow__slide-image--desktop" src="{{media_url}}{{slider.image}}" alt="{{slider.image}}"> {% endcomment %}
+
+                                <div class="block-slideshow__slide-image block-slideshow__slide-image--desktop" style="background-image: url('{{ media_url }}{{ slider.image }}')"></div>
+                                <div class="block-slideshow__slide-image block-slideshow__slide-image--mobile" style="background-image: url('{{ media_url }}{{ slider.image }}')"></div> 
+                                
+                                <div class="block-slideshow__slide-content">
+                                    <div class="block-slideshow__slide-title">
+                                        {% if slider.heading_1 %}
+                                            {{ slider.heading_1 }}
+                                        {% endif %}
+                                    </div>
+                                    <div class="block-slideshow__slide-text">
+                                    {% if slider.heading_2 %}
+                                        {{ slider.heading_2 }}
+                                    {% endif %}  
+                                    <br> 
+                                    {% if slider.heading_3 %}
+                                        {{ slider.heading_3 }}
+                                    {% endif %}
+                                    </div>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

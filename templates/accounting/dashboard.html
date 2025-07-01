@@ -1,0 +1,13 @@
+{% extends "user_template.html" %}
+{% load render_partial %}
+
+{% block title %}داشبورد{% endblock %}
+
+
+{% block content %}
+    <div class="dashboard">
+        {% include "accounting/user_info.html" %}
+        {% render_partial "accounting:fetch_orders" %}
+    <div>
+{% endblock %}
+ 

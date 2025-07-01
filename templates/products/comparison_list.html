@@ -1,0 +1,11 @@
+{% extends "main_template.html" %}
+{% load render_partial %}
+{% load humanize %}
+
+{% block title %}نتیجه مقایسه{% endblock %}
+
+{% block content %}
+    <div id="comparison_list">
+        {% render_partial "products:comparison_table" %}
+    </div>
+{% endblock %}

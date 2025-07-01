@@ -1,0 +1,37 @@
+{% if product_list %}
+    <div class="container">
+        <h2 style="text-align:center;">کالاهای انتخابی</h2>
+        <table class="table table-bordered">
+
+            <tr style="background:#f1f1f1; text-align:center;">
+                <th>ویژگی کالا / کالا </th>
+                {% for product in product_list %}
+                    <th>
+                        <i class="fa fa-times product-remove" style="cursor:pointer;" onclick="del_from_comparison_list({{product.id}})">
+                            {{ product.title }}
+                        </i>
+                    </th>
+                {% endfor %}
+            </tr>
+
+            {% for feature in feature_list %}
+                <tr>
+                    <td style="font-size:1.2rem; font-weight:900; width:25%;">{{feature}}</td>
+                    {% for product in product_list %}
+                        <td style="text-align:center;">
+                            {% for item in product.productFeature.all %}
+                                {% if item.features == features %}
+                                    <span style="margin:5px;">{{item.filter_value.value_title}}</span>
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% else %}
+    <div class="container">
+        <h2 style="text-align:center; padding:100px;">کالایی برای مقایسه وجود ندارد</h2>
+    </div>
+{% endif %}

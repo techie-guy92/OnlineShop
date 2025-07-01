@@ -1,0 +1,31 @@
+# Ignore Python bytecode files and etc
+__pycache__/
+*.py[cod]
+settings.json
+
+
+# Ignore sql files
+backup.sql
+
+# Ignore virtual environment directories
+venv/
+.env
+
+# Ignore logs
+logs/
+*.log
+
+# Ignore VS Code settings and extensions
+.vscode/
+
+# Ignore backup.sql
+*.sql
+
+# Ignore other OS-specific files
+.DS_Store
+.codegpt
+
+# Ignore celery beat schedule files
+celerybeat-schedule
+celerybeat-schedule-shm
+celerybeat-schedule-wal

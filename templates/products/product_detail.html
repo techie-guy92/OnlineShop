@@ -1,0 +1,335 @@
+{% extends "main_template.html" %}
+{% load render_partial %}
+{% load humanize %}
+
+{% block title %}جزییات کالا{% endblock %}
+
+{% block content %}
+<div class="site__body">
+    <div class="page-header">
+        <div class="page-header__container container">
+            <div class="page-header__breadcrumb">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="{% url "main:index" %}">خانه</a>/
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="{% url "products:all_groups" %}">محصولات</a>/
+                            {% comment %} <a href="">محصولات</a>/ {% endcomment %}
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a> {{group.title}}</a>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="block">
+        <div class="container">
+            <div class="product product--layout--columnar" data-layout="columnar">
+                <div class="product__content">
+                    <!-- .product__gallery -->
+                    <div class="product__gallery">
+                        <div class="product-gallery">
+                            <div class="product-gallery__featured">
+                                <div class="owl-carousel" id="product-image">
+                                    <a href="#"><img src="{{media_url}}{{product.image}}" alt="{{title}}"> </a>
+
+                                    {% for image in product.productImages.all %}
+                                        <a href="#"><img src="{{media_url}}{{image.image}}" alt="{{image.image}}"> </a>
+                                    {% endfor %} 
+
+                                </div>
+                            </div>
+                            <div class="product-gallery__carousel">
+                                <div class="owl-carousel" id="product-carousel">
+                                    <a href="#" class="product-gallery__carousel-item"><img class="product-gallery__carousel-image" src="{{media_url}}{{product.image}}" alt="{{title}}"> </a>
+
+                                    {% for image in product.productImages.all %}
+                                        <a href="#"><img src="{{media_url}}{{image.image}}" alt="{{image.image}}"> </a>
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- .product__gallery / end -->
+                    <!-- .product__info -->
+                    <div class="product__info">
+                        <div class="product__wishlist-compare">
+                            <button type="button" class="btn btn-sm btn-light btn-svg-icon" data-toggle="tooltip" data-placement="right" title="Wishlist">
+                                <svg width="16px" height="16px">
+                                    <use xlink:href="images/sprite.svg#wishlist-16"></use>
+                                </svg>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-light btn-svg-icon" data-toggle="tooltip" data-placement="right" title="Compare">
+                                <svg width="16px" height="16px">
+                                    <use xlink:href="images/sprite.svg#compare-16"></use>
+                                </svg>
+                            </button>
+                        </div>
+                        <h1 class="product__name">{{product.title}}</h1>
+                        <div class="product__rating">
+                            <div class="product__rating-stars">
+                                <div class="rating">
+                                    <div class="rating__body">
+                                        <svg class="rating__star rating__star--active" width="13px" height="12px">
+                                            <g class="rating__fill">
+                                                <use xlink:href="images/sprite.svg#star-normal"></use>
+                                            </g>
+                                            <g class="rating__stroke">
+                                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
+                                            </g>
+                                        </svg>
+                                        <div class="rating__star rating__star--only-edge rating__star--active">
+                                            <div class="rating__fill">
+                                                <div class="fake-svg-icon"></div>
+                                            </div>
+                                            <div class="rating__stroke">
+                                                <div class="fake-svg-icon"></div>
+                                            </div>
+                                        </div>
+                                        <svg class="rating__star rating__star--active" width="13px" height="12px">
+                                            <g class="rating__fill">
+                                                <use xlink:href="images/sprite.svg#star-normal"></use>
+                                            </g>
+                                            <g class="rating__stroke">
+                                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
+                                            </g>
+                                        </svg>
+                                        <div class="rating__star rating__star--only-edge rating__star--active">
+                                            <div class="rating__fill">
+                                                <div class="fake-svg-icon"></div>
+                                            </div>
+                                            <div class="rating__stroke">
+                                                <div class="fake-svg-icon"></div>
+                                            </div>
+                                        </div>
+                                        <svg class="rating__star rating__star--active" width="13px" height="12px">
+                                            <g class="rating__fill">
+                                                <use xlink:href="images/sprite.svg#star-normal"></use>
+                                            </g>
+                                            <g class="rating__stroke">
+                                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
+                                            </g>
+                                        </svg>
+                                        <div class="rating__star rating__star--only-edge rating__star--active">
+                                            <div class="rating__fill">
+                                                <div class="fake-svg-icon"></div>
+                                            </div>
+                                            <div class="rating__stroke">
+                                                <div class="fake-svg-icon"></div>
+                                            </div>
+                                        </div>
+                                        <svg class="rating__star rating__star--active" width="13px" height="12px">
+                                            <g class="rating__fill">
+                                                <use xlink:href="images/sprite.svg#star-normal"></use>
+                                            </g>
+                                            <g class="rating__stroke">
+                                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
+                                            </g>
+                                        </svg>
+                                        <div class="rating__star rating__star--only-edge rating__star--active">
+                                            <div class="rating__fill">
+                                                <div class="fake-svg-icon"></div>
+                                            </div>
+                                            <div class="rating__stroke">
+                                                <div class="fake-svg-icon"></div>
+                                            </div>
+                                        </div>
+                                        <svg class="rating__star rating__star--active" width="13px" height="12px">
+                                            <g class="rating__fill">
+                                                <use xlink:href="images/sprite.svg#star-normal"></use>
+                                            </g>
+                                            <g class="rating__stroke">
+                                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
+                                            </g>
+                                        </svg>
+                                        <div class="rating__star rating__star--only-edge rating__star--active">
+                                            <div class="rating__fill">
+                                                <div class="fake-svg-icon"></div>
+                                            </div>
+                                            <div class="rating__stroke">
+                                                <div class="fake-svg-icon"></div>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% if product.short_description %}
+                            <div class="product__description">{{product.short_description}}</div>
+                        {% else %}
+                            <div class="product__description"></div>
+                        {% endif %}
+                        <ul class="product__meta" style="width:100%; display:flex; justify-content:space-between; padding:0;">
+                            {% if product.fetch_count_of_product <= 0 %}
+                                <li class="product__meta-availability">موجودی : 0 <span class="text-success">موجود در انبار</span></li>
+                            {% else %}
+                                <li class="product__meta-availability">موجودی : {{product.fetch_count_of_product}} <span class="text-success">موجود در انبار</span></li>
+                            {% endif %}
+                                <li style="list-style:none;">برند: <a href="">{{product.product_brands}}</a></li>
+                                <li style="list-style:none;">تعداد نظرات: <a href="">{{product.Commetnt_Product.all|length}}</a> نظر</li>
+                        </ul>
+                        <div id="vacant-space" style="display:flex; justify-content:space-between;">
+                            {% include "hub/giving_score.html" %} 
+                        </div>
+                    </div>
+                    <!-- .product__info / end -->
+                    <!-- .product__sidebar -->
+                    <div class="product__sidebar">
+                        {% if product.fetch_count_of_product <= 0 %}
+                            <div class="product-card__availability">موجودی : 0 <span class="text-success"></span></div>
+                        {% else %}
+                            <div class="product-card__availability">موجودی : {{product.fetch_count_of_product}} <span class="text-success"></span></div>
+                            {% if product.price > product.fetch_discount_basket %}
+                                <div class="product-card__prices"><del>{{ product.price|intcomma:False }}</del> تومان</div>
+                                <div class="product-card__prices">{{ product.fetch_discount_basket|intcomma:False }} تومان</div>
+                            {% else %}
+                                <div class="product-card__prices">{{ product.price|intcomma:False }} تومان</div>
+                            {% endif %}
+                        {% endif %}
+                        <!-- .product__options -->
+                        <form class="product__options">
+                            <!-- <div class="form-group product__option">
+                                <label class="product__option-label">رنگ</label>
+                                <div class="input-radio-color">
+                                    <div class="input-radio-color__list">
+                                        <label class="input-radio-color__item input-radio-color__item--white" style="color: #fff;" data-toggle="tooltip" title="White">
+                                            <input type="radio" name="color"> <span></span></label>
+                                        <label class="input-radio-color__item" style="color: #ffd333;" data-toggle="tooltip" title="Yellow">
+                                            <input type="radio" name="color"> <span></span></label>
+                                        <label class="input-radio-color__item" style="color: #ff4040;" data-toggle="tooltip" title="Red">
+                                            <input type="radio" name="color"> <span></span></label>
+                                        <label class="input-radio-color__item input-radio-color__item--disabled" style="color: #4080ff;" data-toggle="tooltip" title="Blue">
+                                            <input type="radio" name="color" disabled> <span></span></label>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <div class="form-group product__option">
+                                <label class="product__option-label">ویژگی ها:</label>
+                                <div class="input-radio-label">
+                                    <div class="input-radio-label__list">
+                                        {% for feature in product.productFeature.all %} 
+                                            <label> 
+                                                <input type="radio" name="material"> 
+                                                <span>{{feature.features}} : {{feature.value}}</span> 
+                                            </label>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% if product.fetch_count_of_product > 0 %}
+                                <div class="form-group product__option">
+                                    <label class="product__option-label" for="product-quantity">تعداد</label>
+                                    <div class="product__actions">
+                                        <div class="product__actions-item">
+                                            <div class="input-number product__quantity">
+                                                <input id="product-quantity" class="form-control form-control-lg" type="number" min="1" value="1">
+                                            </div>
+                                        </div>
+                                        <div class="product__actions-item product__actions-item--addtocart">
+                                            <button type="button" class="btn btn-primary btn-lg" onclick="add_to_cart({{product.id}},0)">افزودن به سبد</button>
+                                        </div>
+                            {% else %}
+                                            <span style="color:red">ناموجود</span>
+                            {% endif %}
+                                    <div class="product__actions-item product__actions-item--wishlist">
+                                        <button type="button" class="btn btn-secondary btn-svg-icon btn-lg" data-toggle="tooltip" title="Wishlist">
+                                            <svg width="16px" height="16px">
+                                                <use xlink:href="images/sprite.svg#wishlist-16"></use>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="product__actions-item product__actions-item--compare">
+                                        <button type="button" class="btn btn-secondary btn-svg-icon btn-lg" data-toggle="tooltip" title="Compare">
+                                            <svg width="16px" height="16px">
+                                                <use xlink:href="images/sprite.svg#compare-16"></use>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- .product__options / end -->
+                    </div>
+                    <!-- .product__end -->
+                    <div class="product__footer">
+                        <div class="product__share-links share-links">
+                            <ul class="share-links__list">
+                                <li class="share-links__item share-links__item--type--like"><a href="">اشتراک گذاری</a></li>
+                            </ul>
+                            <a style="cursor:pointer;" onclick="add_to_comparison_list({{product.id}},{{product.fetch_main_group}})">
+                                <div style="margin:10px; text-align:center; border:2px solid #f1f1f1; width:30px; height:30px; border-radius:10px;">
+                                    <i class="fa fa-random" aria-hidden="true"></i>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-tabs">
+                <div class="product-tabs__list">
+                    <a href="#tab-description" class="product-tabs__item product-tabs__item--active">توضیحات</a> 
+                    <a href="#tab-reviews" class="product-tabs__item">دیدگاه ها</a>
+                </div>
+                <div class="product-tabs__content">
+                    <div class="product-tabs__pane product-tabs__pane--active" id="tab-description">
+                        <div class="typography">
+                            <h3>توضیحات محصول :</h3>
+                            <p>{% autoescape off %}{{product.description}}{% endautoescape %}</p>
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="product-tabs__pane" id="tab-reviews">
+                        <div class="reviews-view">
+                            <div class="reviews-view__list">
+                                {% include "hub/reading_comments.html" %}
+                            </div>
+                            {% if user.is_authenticated %}
+                                {% render_partial "Hub:making_comment" slug=product.slug %} 
+                            {% else %}
+                                <h5>
+                                    برای ثبت نظر 
+                                    <a href="{% url "accounting:login_user" %}?next=/products/{{products.slug}}/">ورود</a>
+                                    یا
+                                    <a href="{% url "accounting:register_user" %}?next=/products/{{products.slug}}/">ثبت نام</a>
+                                    کنید
+                                </h5>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- .block-products-carousel -->
+     <div class="block block-products-carousel" data-layout="grid-5">
+        <div class="container">
+            <div class="block-header">
+                {% comment %} {% render_partial "products:related_products" slug=product.slug %} {% endcomment %}
+                {% if related_products %}
+                    <div class="block block-products-carousel" data-layout="grid-5">
+                        <div class="container">
+                            {% include "products/product_partials/root_groups.html" with title="محصولات مرتبط" %}
+                            <div class="product-flexbox" style="">
+                                {% for product in related_products %}
+                                    {% include "products/product_partials/product_box.html" with type=3 %}
+                                {% endfor %}
+                             </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+         </div>
+    </div> 
+    <!-- .block-products-carousel / end -->
+</div>
+
+{% endblock %}
+
+

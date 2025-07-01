@@ -1,0 +1,32 @@
+<h6 style="margin-top:20px;">میانگین امتیاز : <span>{{product.cal_avg_score}}</span></h6>
+
+{% if user.is_authenticated %}
+        {% if product.fetch_score > 0 %}
+            <div style="margin-top:20px;">
+                {% with ''|center:5 as range %}
+                    {% for i in range %}
+                        {% if forloop.counter <= product.fetch_score %}
+                            <span id="star_{{ forloop.counter }}" class="fa fa-star checked"></span>
+                        {% else %}
+                            <span id="star_{{ forloop.counter }}" class="fa fa-star"></span>
+                        {% endif %}
+                    {% endfor %}
+                {% endwith %}
+            </div>
+        {% else %}
+            <div style="margin-top:20px;">
+                <span id="star_1" class="fa fa-star cursor_pointer" onclick="giving_score(1,{{product.id}})"></span>
+                <span id="star_2" class="fa fa-star cursor_pointer" onclick="giving_score(2,{{product.id}})"></span>
+                <span id="star_3" class="fa fa-star cursor_pointer" onclick="giving_score(3,{{product.id}})"></span>
+                <span id="star_4" class="fa fa-star cursor_pointer" onclick="giving_score(4,{{product.id}})"></span>
+                <span id="star_5" class="fa fa-star cursor_pointer" onclick="giving_score(5,{{product.id}})"></span>
+            </div>
+        {% endif %} 
+{% else %}
+    {% comment %} <h5>
+        <a href="{% url "accounting:login_user" %}?next=/products/{{products.slug}}/">ورود</a>
+        یا
+        <a href="{% url "accounting:register_user" %}?next=/products/{{products.slug}}/">ثبت نام</a>
+        کنید
+    </h5> {% endcomment %}
+{% endif %}

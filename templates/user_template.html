@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <meta name="description" content="the content of this web site is experimental">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="keyword" content="HTML,Experimental">
+        <meta name="author" content="Soheil Daliri">
+        <meta name="robots" content="follow,index">
+        <title>فروشگاه آنلاین | {% block title %} {% endblock %}</title>
+        <link rel="icon" href="{{media_url}}images/django-favicon.png" sizes="64x64" type="image/png">
+        <!-- css -->
+        <link rel="stylesheet" href="{% static "vendor/bootstrap-4.5.3/css/bootstrap.min.css" %}">
+        <link rel="stylesheet" href="{% static "vendor/owl-carousel-2.3.4/assets/owl.carousel.min.css" %}">
+        <link rel="stylesheet" href="{% static "css/style.css" %}">
+        <link rel="stylesheet" href="{% static "css/custom.css" %}">
+        <!-- js -->
+        <script src="{% static "vendor/jquery-3.3.1/jquery.min.js" %}"></script>
+        <script src="{% static "vendor/bootstrap-4.5.3/js/bootstrap.bundle.min.js" %}"></script>
+        <script src="{% static "vendor/owl-carousel-2.3.4/owl.carousel.min.js" %}"></script>
+        <script src="{% static "js/main.js" %}"></script>
+        {% comment %} <script src="{% static "js/countdown.js" %}"></script> {% endcomment %}
+        <script src="{% static "js/filters.js" %}"></script>
+        <script src="{% static "js/scripts.js" %}"></script>
+        {% comment %} <script src="{% static "js/checked_checkbox.js" %}"></script> {% endcomment %}
+        <!-- font - fontawesome -->
+        <link rel="stylesheet" href="{% static "vendor/fontawesome-5.6.3/css/all.min.css" %}">
+    </head>
+    <body>
+
+        {% include "partials/header.html" %}
+
+        {% include "partials/warning_mesaages.html" %}
+
+        <div class="site__body">
+            <div class="page-header">
+                <div class="page-header__container container">
+                    <div class="page-header__breadcrumb">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="{% url "main:index" %}">خانه</a>/
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="{% url "accounting:dashboard" %}">داشبورد</a>
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="page-header__title">
+                        <h1>حساب کاربری</h1></div>
+                </div>
+            </div>
+            <div class="block">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-lg-3 d-flex">
+                            <div class="account-nav flex-grow-1">
+                                <h4 class="account-nav__title">ناوبری</h4>
+                                <ul>
+                                    <li class="account-nav__item account-nav__item--active"><a href="{% url "accounting:dashboard" %}">داشبورد</a></li>
+                                    <li class="account-nav__item"><a href="{% url "accounting:update_profile" %}">ویرایش پروفایل</a></li>
+                                    <li class="account-nav__item"><a href="{% url "accounting:changing_pass" %}">تغییر رمز عبور</a></li>
+                                    <li class="account-nav__item"><a href="{% url "accounting:fetch_payments" %}">سابقه خرید</a></li>
+                                    <li class="account-nav__item"><a href="{% url "accounting:logout_user" %}">خروج</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-9 mt-4 mt-lg-0">
+                            {% block content %}{% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% include "partials/footer.html" %}
+    </body>
+</html>
