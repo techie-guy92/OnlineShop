@@ -40,8 +40,3 @@ class Order_Form(forms.Form):
     # payment_type_choices[0] = (payment_type_choices[0][1], {payment_type_choices[0]})
     # payment_type = forms.ChoiceField(label="شیوه پرداخت", choices=payment_type_choices, widget=forms.RadioSelect())
     
-
-
-
-
- 
